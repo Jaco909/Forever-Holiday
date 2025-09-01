@@ -22,19 +22,20 @@ public class GameSeasonsPatchHalloween {
         boolean halloweens = isBetween(18, 10, 7, 11);
         boolean christmas = isBetween(1, 12, 28, 12);
         boolean newYear = isBetween(28, 12, 7, 1);
-        boolean forced = ForeverHoliday.settings.overrideSeason;
+        boolean forced = ForeverHoliday.settingsGetter.getBoolean("override");
+        boolean selected = ForeverHoliday.settingsGetter.getSelection("selectHoliday").toString().equalsIgnoreCase("spooky");
 
-        if ((christmas || aprilFools || newYear)  && !ForeverHoliday.settings.overrideSeason) {
-            //System.out.println("Halloween blocked by vanilla season time!");
+        if ((christmas || aprilFools || newYear)  && !forced) {
+            //blocked by vanilla season time
             halloween = false;
-        }else if (ForeverHoliday.settings.overrideSeason && ForeverHoliday.settings.selectedSeason != 1) {
-            //System.out.println("Halloween blocked for another forced!");
+        }else if (forced && !selected) {
+            //blocked for another forced
             halloween = false;
-        } else if (halloweens && !ForeverHoliday.settings.overrideSeason) {
+        } else if (halloweens && !forced) {
             //vanilla season time
             halloween = true;
-        } else if ((ForeverHoliday.settings.selectedSeason == 1 && !christmas && !aprilFools && !newYear) || (ForeverHoliday.settings.overrideSeason && ForeverHoliday.settings.selectedSeason == 1)) {
-            //System.out.println("Halloween forced!");
+        } else if ((selected && !christmas && !aprilFools && !newYear) || (forced && selected)) {
+            //forced
             halloween = true;
         }
         return halloween;

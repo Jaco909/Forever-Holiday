@@ -1,0 +1,9 @@
+[settingsui]
+selectHoliday=Selected Holiday
+none=None
+xmas=Festive
+spooky=Halloween
+years=New Years
+fools=April Fools
+override=Override the vanilla season calendar with the forced holiday.
+restart=Visuals update upon changing levels. Crates require the world to exit and reload. (This settings does nothing.)
